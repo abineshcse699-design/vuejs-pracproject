@@ -11,7 +11,7 @@ import SubjectRightSection from '@/components/lay/SubjectRightSection.vue'
 
   <TgCard1 />
 
-  <!-- MAIN LAYOUT WRAPPER -->
+  <!-- MAIN LAYOUT WRAPPER adc-->
   <div class="main-layout">
 
     <LeftSidebar />
