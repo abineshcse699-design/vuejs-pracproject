@@ -1,0 +1,102 @@
+{
+  "navbar": {
+    "id": 1,
+    "brand": "UPOV",
+    "menus": [
+      {
+        "id": 1,
+        "label": "HOME",
+        "hasDropdown": false
+      },
+      {
+        "id": 2,
+        "label": "FIND & EXPLORE",
+        "hasDropdown": true,
+        "dropdown": [
+          "Information & Guidance",
+          "Databases",
+          "Publications"
+        ]
+      },
+      {
+        "id": 3,
+        "label": "PLANT VARIETY PROTECTION",
+        "hasDropdown": true,
+        "dropdown": [
+          "Application",
+          "Examination",
+          "Granting"
+        ]
+      },
+      {
+        "id": 4,
+        "label": "FILE & MANAGE",
+        "hasDropdown": true,
+        "dropdown": [
+          "New Filing",
+          "My Applications"
+        ]
+      },
+      {
+        "id": 5,
+        "label": "ABOUT UPOV",
+        "hasDropdown": true,
+        "dropdown": [
+          "Mission",
+          "Members",
+          "Contact"
+        ]
+      }
+    ]
+  },
+
+  "breadcrumb": [
+    "Find & Explore",
+    "Information & Guidance",
+    "Examination Guidance",
+    "TG Template",
+    "TG Dashboard"
+  ],
+
+  "tgcards": [
+    {
+      "id": 1,
+      "mainName": "European Pear",
+      "upovCodes": [
+        "PYRUS_COM",
+        "PYRUS_BCO",
+        "PYRUS_CPB",
+        "PYRUS_CUS"
+      ],
+      "tgCode": "TG/export_test_2",
+      "savedFrom": "02 Dec, 2025",
+      "savedTo": "31 Dec, 2025"
+    }
+  ],
+
+  "chapters": [
+    { "id": 1, "number": "01", "title": "Subject", "active": true },
+    { "id": 2, "number": "02", "title": "Material", "active": false },
+    { "id": 3, "number": "03", "title": "Examination", "active": false },
+    { "id": 4, "number": "04", "title": "Grouping", "active": false },
+    { "id": 5, "number": "05", "title": "Characteristics", "active": false },
+    { "id": 6, "number": "06", "title": "Characteristics", "active": false },
+    { "id": 7, "number": "07", "title": "Table of characteristics", "active": false },
+    { "id": 8, "number": "08", "title": "Explanations", "active": false },
+    { "id": 9, "number": "09", "title": "Literature", "active": false },
+    { "id": 10, "number": "10", "title": "Technical questionnaire", "active": false },
+    { "id": 11, "number": "11", "title": "Annex", "active": false }
+  ],
+
+  "subjectSection": [
+    {
+      "id": 1,
+      "title": "1. Subject of these Test Guidelines",
+      "species": "Malpighia emarginata DC.",
+      "clarification": "Yes",
+      "hybridText": "interspec. hybrids",
+      "additionalAnswer": "Yes",
+      "additionalType": "agricultural"
+    }
+  ]
+}
