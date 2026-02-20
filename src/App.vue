@@ -1,4 +1,3 @@
-
 <script setup>
 import AppNavbar from '@/components/Navbar/AppNavbar.vue'
 import TgCard1 from '@/components/TG/TgCard1.vue'
@@ -11,12 +10,12 @@ import SubjectRightSection from '@/components/lay/SubjectRightSection.vue'
 
   <TgCard1 />
 
-  <!-- MAIN LAYOUT WRAPPER adc-->
+  <!-- MAIN LAYOUT WRAPPER -->
   <div class="main-layout">
 
-    <LeftSidebar />
+    <LeftSidebar class="sidebar" />
 
-    <SubjectRightSection />
+    <SubjectRightSection class="content" />
 
   </div>
 </template>
@@ -25,17 +24,37 @@ import SubjectRightSection from '@/components/lay/SubjectRightSection.vue'
 .main-layout {
   display: flex;
   align-items: flex-start;
+  min-height: 100vh;
 }
 
-/* LEFT SIDEBAR FIX WIDTH */
-.main-layout > :first-child {
-  width: 200px;
+/* DESKTOP */
+.sidebar {
+  width: 220px;
   flex-shrink: 0;
-  height: 115vh;
 }
 
-/* RIGHT SECTION TAKE REMAINING SPACE */
-.main-layout > :last-child {
+.content {
   flex: 1;
+  padding: 20px;
+}
+
+/* ----------------------- */
+/* 📱 TABLET & MOBILE */
+/* ----------------------- */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .content {
+    width: 100%;
+    padding: 16px;
+  }
 }
 </style>

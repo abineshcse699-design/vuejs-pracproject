@@ -3,23 +3,30 @@
 
     <!-- TOP NAVBAR -->
     <div class="bg-[#1f3b37] text-white">
-      <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         <!-- BRAND -->
-        <div class="text-3xl font-bold tracking-widest">
+        <div class="text-2xl md:text-3xl font-bold tracking-widest">
           <span v-if="!loading">{{ navbar.brand }}</span>
           <span v-else class="animate-pulse">Loading...</span>
         </div>
 
-        <!-- MENU -->
-        <ul class="flex items-center gap-8 text-sm font-semibold relative">
+        <!-- HAMBURGER (Mobile Only) -->
+        <button
+          class="md:hidden text-2xl"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+        >
+          ☰
+        </button>
+
+        <!-- MENU (Desktop) -->
+        <ul class="hidden md:flex items-center gap-8 text-sm font-semibold relative">
 
           <li
             v-for="menu in navbar.menus"
             :key="menu.id"
             class="relative"
           >
-            <!-- Menu Label -->
             <div
               @click="toggleDropdown(menu)"
               class="flex items-center gap-1 cursor-pointer hover:text-yellow-400 transition"
@@ -46,21 +53,55 @@
                 {{ item }}
               </div>
             </div>
-
           </li>
 
-          <!-- SEARCH ICON -->
+          <!-- SEARCH -->
           <li class="cursor-pointer text-lg hover:text-yellow-400">
             🔍
           </li>
 
         </ul>
       </div>
+
+      <!-- MOBILE MENU -->
+      <div
+        v-if="mobileMenuOpen"
+        class="md:hidden bg-[#244640] px-6 py-4 space-y-4"
+      >
+        <div
+          v-for="menu in navbar.menus"
+          :key="menu.id"
+        >
+          <div
+            @click="toggleDropdown(menu)"
+            class="flex justify-between items-center cursor-pointer py-2 font-semibold"
+          >
+            {{ menu.label }}
+            <span v-if="menu.hasDropdown">▼</span>
+          </div>
+
+          <!-- Mobile Dropdown -->
+          <div
+            v-if="activeDropdown === menu.id"
+            class="pl-4 mt-2 space-y-2 text-sm text-gray-200"
+          >
+            <div
+              v-for="(item, index) in menu.dropdown"
+              :key="index"
+              class="cursor-pointer"
+            >
+              {{ item }}
+            </div>
+          </div>
+        </div>
+
+        <div class="text-lg pt-2 cursor-pointer">🔍 Search</div>
+      </div>
     </div>
 
     <!-- BREADCRUMB -->
     <div class="bg-[#cddc00]">
-      <div class="max-w-7xl mx-auto px-8 py-3 text-sm font-medium text-[#1f3b37]">
+      <div class="max-w-7xl mx-auto px-6 py-3 text-sm font-medium text-[#1f3b37] overflow-x-auto whitespace-nowrap">
         <span
           v-for="(item, index) in breadcrumb"
           :key="index"
@@ -87,35 +128,31 @@ const navbar = ref({
 const breadcrumb = ref([])
 const loading = ref(false)
 const activeDropdown = ref(null)
+const mobileMenuOpen = ref(false)
 
 /* Toggle Dropdown */
 const toggleDropdown = (menu) => {
   if (!menu.hasDropdown) return
 
-  if (activeDropdown.value === menu.id) {
-    activeDropdown.value = null
-  } else {
-    activeDropdown.value = menu.id
-  }
+  activeDropdown.value =
+    activeDropdown.value === menu.id ? null : menu.id
 }
 
 /* Close dropdown when clicking outside */
 const handleClickOutside = (event) => {
-  if (!event.target.closest('li')) {
+  if (!event.target.closest('header')) {
     activeDropdown.value = null
+    mobileMenuOpen.value = false
   }
-  
 }
 
 const fetchNavbar = async () => {
   loading.value = true
   try {
     const navRes = await fetch('http://localhost:3001/navbar')
-    if (!navRes.ok) throw new Error('Navbar fetch failed')
     navbar.value = await navRes.json()
 
     const breadRes = await fetch('http://localhost:3001/breadcrumb')
-    if (!breadRes.ok) throw new Error('Breadcrumb fetch failed')
     breadcrumb.value = await breadRes.json()
 
   } catch (error) {
